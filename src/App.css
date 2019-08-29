@@ -31,3 +31,41 @@
     transform: rotate(360deg);
   }
 }
+
+.MuiGrid-container{
+  background-size: cover;
+  background-image: url(/static/media/background.93478c54.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+}
+
+
+.LoginBox{
+  right:0;
+  position: absolute;
+}
+.LoginSubBox{
+  margin: 64px 32px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: white;
+  border: 1px solid black;
+  border-radius: 6px;
+  padding: 10px;
+}
+.Main{
+  height: 100vh;
+}
+.Login Form{
+  width: 100%;
+  margin-top: 8px;
+}
+.Sumbit{
+  margin:10px 0 10px !important;
+}
+
+.inValid {
+  border: 2px solid red !important;
+}
