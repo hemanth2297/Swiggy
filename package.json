@@ -18,6 +18,7 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
     "reactstrap": "^8.0.1",
+    "spectacle": "^5.7.0",
     "typescript": "3.6.2"
   },
   "scripts": {

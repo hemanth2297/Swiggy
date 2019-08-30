@@ -34,10 +34,18 @@
 
 .MuiGrid-container{
   background-size: cover;
-  background-image: url(/static/media/background.93478c54.jpg);
+  background-image: url(./assets/images/background.jpg);
   background-repeat: no-repeat;
   background-position: center;
   height: 100vh;
+}
+
+.LoginBox{
+  background: white;
+  border: 1px solid black;
+  border-radius: 6px;
+  padding: 10px;
+  margin: 0 50px 0 0 !important;
 }
 
 
