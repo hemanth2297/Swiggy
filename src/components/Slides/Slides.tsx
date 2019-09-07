@@ -3,6 +3,8 @@ import {
     BlockQuote, Cite, Deck, Heading, Image, List, ListItem, Quote, Slide, Text
 } from 'spectacle';
 import createTheme from 'spectacle/lib/themes/default';
+import Button from '@material-ui/core/Button';
+import { Redirect } from 'react-router-dom';
 
 const theme = createTheme(
     {
@@ -22,8 +24,25 @@ const images = {
     goodWork: require('../../assets/images/formidagon.png')
 };
 
-export default class Presentation extends React.Component {
+
+export default class Presentation extends React.Component<any, any> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            redirect: false
+        }
+    }
+
+    dashboardRedirect = () => {
+        this.setState({
+            redirect: true
+        })
+    }
     render() {
+        console.log("render")
+        if (this.state.redirect) {
+            return <Redirect push to="/login/" />
+        }
         return (
             <Deck
                 theme={theme}
@@ -32,10 +51,10 @@ export default class Presentation extends React.Component {
             >
                 <Slide transition={['zoom']} bgColor="primary">
                     <Heading size={1} fit caps lineHeight={1} textColor="secondary">
-                        Spectacle Boilerplate
+                        Training Video
             </Heading>
                     <Text margin="10px 0 0" textColor="tertiary" fit bold>
-                        open the presentation/index.js file to get started
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit
             </Text>
                 </Slide>
                 <Slide bgColor="secondary">
@@ -83,6 +102,16 @@ export default class Presentation extends React.Component {
                 </Slide>
                 <Slide>
                     <Image src={images.goodWork} width={500} />
+                </Slide>
+                <Slide>
+                    <Button
+                        type="button"
+                        size="medium"
+                        variant="contained"
+                        color="primary"
+                        onClick={() => this.dashboardRedirect()}>
+                        Go To DashBoard
+                    </Button>
                 </Slide>
             </Deck>
         );

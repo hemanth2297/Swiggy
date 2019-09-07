@@ -4,13 +4,19 @@
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+  height: 100px;
   pointer-events: none;
+}
+
+.Sucess-logo{
+  height: 100px;
+  pointer-events: none;
+  margin-top: 20px;
 }
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 30vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,6 +24,7 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
 
 .App-link {
   color: #61dafb;
@@ -33,36 +40,41 @@
 }
 
 .MuiGrid-container{
-  background-size: cover;
+  /* background-size: cover;
   background-image: url(./assets/images/background.jpg);
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center; */
   height: 100vh;
 }
 
 .LoginBox{
   background: white;
   border: 1px solid black;
-  border-radius: 6px;
-  padding: 10px;
-  margin: 0 50px 0 0 !important;
+  border-radius: 10px;
+  padding: 17px;
+  margin: 0 8vw 0 0 !important;
+
 }
 
-
-.LoginBox{
-  right:0;
+.LoginPage{
   position: absolute;
+  top: 0px;
 }
-.LoginSubBox{
-  margin: 64px 32px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+
+.RegisterBox{
   background: white;
   border: 1px solid black;
-  border-radius: 6px;
-  padding: 10px;
+  border-radius: 10px;
+  padding: 17px;
 }
+.TermsBox{
+  background: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 17px;
+}
+
+
 .Main{
   height: 100vh;
 }
@@ -74,6 +86,26 @@
   margin:10px 0 10px !important;
 }
 
-.inValid {
-  border: 2px solid red !important;
+
+.yellowbg{
+  background: #fff73f
+}
+.redbg{
+  background: #af221b
+}
+.blackbg{
+  background: #012
+}
+.whitebg{
+  background: white;
+}
+
+.TermsPage{
+  width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+.startTest{
+  width:"30%" !important;
 }

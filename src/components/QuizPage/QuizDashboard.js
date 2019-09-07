@@ -3,6 +3,7 @@ import quizQuestions from './quizQuestions';
 import Quiz from './Quiz';
 import Result from './Result';
 import logo from '../../assets/svg/logo.svg';
+import { Redirect } from 'react-router-dom';
 // import './App.css';
 
 class App extends Component {
@@ -16,13 +17,29 @@ class App extends Component {
       answerOptions: [],
       answer: '',
       answersCount: {},
-      result: ''
+      result: '',
+      redirect: false,
     };
 
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
+    this.onSuccessTest = this.onSuccessTest.bind(this)
+  }
+
+
+  onSuccessTest() {
+    console.log("testing")
+    this.setState({
+      redirect: true
+    })
   }
 
   componentDidMount() {
+    const element = document.getElementById("bodybg")
+    if (element) {
+      element.classList.add("whitebg")
+      element.classList.remove("yellowbg", "redbg", "blackbg")
+    }
+
     const shuffledAnswerOptions = quizQuestions.map(question =>
       this.shuffleArray(question.answers)
     );
@@ -116,10 +133,16 @@ class App extends Component {
   }
 
   renderResult() {
-    return <Result quizResult={this.state.result} />;
+    return <Result quizResult={this.state.result}
+      onSuccessTest={this.onSuccessTest}
+    />;
   }
 
   render() {
+
+    if (this.state.redirect) {
+      return <Redirect push to="/slides" />
+    }
     return (
       <div className="App">
         <div className="App-header">

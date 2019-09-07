@@ -20,6 +20,9 @@
     "jsx": "react"
   },
   "include": [
-    "src"
+    "src",
+    "public/jquery.transit.js",
+    "public/jquery.min.js",
+    "public/background.js",
   ]
 }

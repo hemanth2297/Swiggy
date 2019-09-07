@@ -3,6 +3,8 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import logo from '../../assets/gif/login.gif'
+import { Redirect } from 'react-router-dom';
 
 export default class App extends React.Component<any, any>{
     constructor(props: any) {
@@ -12,47 +14,73 @@ export default class App extends React.Component<any, any>{
             showotp: false,
             number: "",
             otp: "",
+            isNumberError: false,
+            numberHelperText: "",
+            isOtpError: false,
+            otpHelperText: "",
+            redirect: false
         }
     }
 
-
-    validatenumber = (value: string) => {
-        if (value.length !== 3) {
-            const element = document.getElementById("number")
-            if (element) {
-                element.classList.add("inValid")
-            }
-            return false
+    componentDidMount() {
+        const element = document.getElementById("bodybg")
+        if (element) {
+            element.classList.add("yellowbg")
+            element.classList.remove("whitebg", "redbg", "blackbg")
         }
-        return true
     }
-    optbuttonOnsumbit = () => {
-        if (this.validatenumber(this.state.number)) {
+    optButtonOnsumbit = () => {
+        console.log(this.state.number.length)
+        if (this.state.number.length !== 10) {
+            this.setState({
+                isNumberError: true,
+                numberHelperText: "Invalid Number"
+            })
+        }
+        else {
             this.setState({
                 showotp: true,
             })
         }
     }
-
-    addToState = (event: any) => {
-        this.setState({
-            [event.target.name]: event.target.value,
-        })
-        const element = document.getElementById(event.target.name)
-        if (element) {
-            element.classList.remove("inValid")
+    validateButtonOnSubmit = () => {
+        if (this.state.otp !== '123') {
+            this.setState({
+                isOtpError: true,
+                otpHelperText: "Invalid OTP"
+            })
+        }
+        else {
+            this.setState({
+                redirect: true
+            })
         }
 
     }
 
+    addToState = (event: any) => {
+        this.setState({
+            [event.target.name]: event.target.value,
+            isNumberError: false,
+            numberHelperText: "",
+            isOtpError: false,
+            otpHelperText: ""
+        })
+
+
+    }
+
     render() {
+        if (this.state.redirect) {
+            return <Redirect push to="/register" />
+        }
 
         const otpButton = (<Button
             type="button"
             fullWidth
             variant="contained"
             color="primary"
-            onClick={() => this.optbuttonOnsumbit()}
+            onClick={() => this.optButtonOnsumbit()}
             className="Sumbit"
         >
             Generate Otp
@@ -63,6 +91,7 @@ export default class App extends React.Component<any, any>{
             fullWidth
             variant="contained"
             color="primary"
+            onClick={() => this.validateButtonOnSubmit()}
             className="Sumbit"
         >
             Validate
@@ -79,34 +108,44 @@ export default class App extends React.Component<any, any>{
             id="otp"
             value={this.state.otp}
             onChange={this.addToState}
+            helperText={this.state.otpHelperText}
+            error={this.state.isOtpError}
+            autoComplete="off"
         />) : ""
 
         const button = this.state.showotp ? validateButton : otpButton;
         return (
-            <Grid container component="main" alignItems="center" justify="center" >
-                <Grid item xs={3} className="LoginBox">
-                    <Typography component="h1" variant="h5">
-                        Sign in</Typography>
-                    <form className="Login Form" noValidate>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="number"
-                            label="Mobile Number"
-                            name="number"
-                            value={this.state.number}
-                            autoFocus
-                            onChange={this.addToState}
-                            helperText="Empty Field"
-                            error={true}
-                        />
-                        {otpTextField}
-                        {button}
-                    </form>
+            <div>
+                <div >
+                    <img src={logo} alt="Loading" title="Loading" style={{ height: "100vh" }} />
+                </div>
+                <Grid container component="main" className="LoginPage" alignItems="center" justify="flex-end" >
+                    <Grid item xs={3} className="LoginBox">
+                        <Typography component="h1" align="center" variant="h5">
+                            Sign in</Typography>
+                        <form className="Login Form" noValidate>
+                            <TextField
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="number"
+                                label="Mobile Number"
+                                name="number"
+                                value={this.state.number}
+                                autoFocus
+                                onChange={this.addToState}
+                                helperText={this.state.numberHelperText}
+                                error={this.state.isNumberError}
+                                disabled={this.state.showotp}
+                                autoComplete="off"
+                            />
+                            {otpTextField}
+                            {button}
+                        </form>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </div>
         );
     }
 }
